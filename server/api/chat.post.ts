@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
       tokenCount += encoded.text.length
 
       // Limit context tokens
-      if (tokenCount > 6000) {
+      if (tokenCount > 5400) {
         console.log('Previous token count', prevTokenCount)
         break
       }
@@ -112,9 +112,7 @@ ${query}`
       {
         model: 'gpt-4',
         messages,
-        stream: true,
-        // @ts-ignore
-        max_tokens: 8192
+        stream: true
       },
       { apiKey: useRuntimeConfig().openaiApiKey }
     )
