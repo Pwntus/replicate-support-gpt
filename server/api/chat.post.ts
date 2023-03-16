@@ -19,7 +19,10 @@ export default defineEventHandler(async (event) => {
   try {
     const { query } = await readBody(event)
 
-    const response = await fetch(FUNCTION_MATCH_DOCUMENTS, { method: 'POST' })
+    const response = await fetch(FUNCTION_MATCH_DOCUMENTS, {
+      method: 'POST',
+      body: JSON.stringify({ query })
+    })
     const { error, documents } = await response.json()
 
     if (error) return { error: error.message }
