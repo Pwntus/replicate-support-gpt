@@ -53,7 +53,7 @@ export default defineEventHandler(async (event) => {
       tokenCount += encoded.text.length
 
       // Limit context tokens
-      if (tokenCount > 10000) {
+      if (tokenCount > 5000) {
         break
       }
 
