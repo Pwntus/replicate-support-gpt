@@ -5,12 +5,10 @@ main
       @keydown.enter="onChat"
       @click:appendInner="onChat"
       v-model="query"
-      :loading="loading"
       variant="outlined"
       density="comfortable"
       append-inner-icon="mdi-send"
       placeholder="What is your question?"
-      ref="input"
       autofocus
     )
     .answers
@@ -26,8 +24,6 @@ import MarkdownIt from 'markdown-it'
 const md = new MarkdownIt()
 
 // State
-const loading = ref(false)
-const input = ref<null | HTMLInputElement>(null)
 const query = ref<string | null>(null)
 const answers = ref<any>({})
 let answers_n = 0
@@ -36,13 +32,15 @@ const formatAnswer = (text: string) => md.render(text)
 
 // Methods
 const onChat = async () => {
-  loading.value = true
   const q = query.value
 
   query.value = ''
-  input.value?.blur()
 
   try {
+    const key = answers_n
+    answers_n += 1
+    answers.value[key] = 'Loading...'
+
     const response = await fetch('/api/chat', {
       method: 'post',
       body: JSON.stringify({
@@ -58,8 +56,6 @@ const onChat = async () => {
     const decoder = new TextDecoder()
     let done = false
 
-    const key = answers_n
-    answers_n += 1
     answers.value[key] = ''
 
     while (!done) {
@@ -80,9 +76,6 @@ const onChat = async () => {
     }
   } catch (e) {
     console.log(e)
-  } finally {
-    loading.value = false
-    input.value?.focus()
   }
 }
 </script>
