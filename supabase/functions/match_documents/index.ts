@@ -29,7 +29,7 @@ serve(async (req) => {
     match_count: 10
   })
 
-  return new Response(JSON.stringify({ error: error.message, documents }), {
+  return new Response(JSON.stringify({ error, documents }), {
     headers: { 'Content-Type': 'application/json' }
   })
 })

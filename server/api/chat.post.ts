@@ -92,7 +92,10 @@ ${query}`
       { apiKey: useRuntimeConfig().openaiApiKey }
     )
 
-    return sendStream(event, stream)
+    // return sendStream(event, stream)
+    return new Response(stream, {
+      headers: { 'Content-Type': 'application/json; charset=utf-8' }
+    })
   } catch (e: any) {
     console.error(e)
     return { error: e.message }
