@@ -4,21 +4,20 @@ import GPT3Tokenizer from 'gpt3-tokenizer'
 import { OpenAI } from 'openai-streams/node'
 import { sendStream } from 'h3'
 
-const openai = new OpenAIApi(
-  new Configuration({
-    apiKey: useRuntimeConfig().openaiApiKey
-  })
-)
-
-const supabase = createClient(
-  useRuntimeConfig().supabaseUrl,
-  useRuntimeConfig().supabaseKey
-)
-
-// @ts-ignore
-const tokenizer = new GPT3Tokenizer.default({ type: 'gpt3' })
-
 export default defineEventHandler(async (event) => {
+  const openai = new OpenAIApi(
+    new Configuration({
+      apiKey: useRuntimeConfig().openaiApiKey
+    })
+  )
+
+  const supabase = createClient(
+    useRuntimeConfig().supabaseUrl,
+    useRuntimeConfig().supabaseKey
+  )
+
+  // @ts-ignore
+  const tokenizer = new GPT3Tokenizer.default({ type: 'gpt3' })
   try {
     const { query } = await readBody(event)
 
