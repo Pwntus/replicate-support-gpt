@@ -1,48 +1,19 @@
-# Nuxt Example
+# SupportGPT
 
-Deploy your [Nuxt](https://nuxt.com) project to Vercel with zero configuration.
+Documentation WIP.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/nuxtjs&template=nuxtjs)
+## Supabase
 
-_Live Example: https://nuxtjs-template.vercel.app_
+Deploy secrets:
 
-Look at the [Nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+Rename `supabase/.example.env` to `supabase/.env`.
 
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn
-
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
+```
+supabase secrets set --env-file ./supabase/.env
 ```
 
-## Development Server
+Deploy function:
 
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
+supabase functions deploy match_documents
 ```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
