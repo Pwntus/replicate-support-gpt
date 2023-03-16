@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
     const { error, data: documents } = await supabase.rpc('match_documents', {
       query_embedding: embedding,
       similarity_threshold: 0.1,
-      match_count: 20
+      match_count: 30
     })
 
     if (error) return { error: error.message }
@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
       tokenCount += encoded.text.length
 
       // Limit context tokens
-      if (tokenCount > 4000) {
+      if (tokenCount > 8192) {
         console.log('Previous token count', prevTokenCount)
         break
       }
@@ -117,8 +117,6 @@ ${query}`
         top_p: 1,
         frequency_penalty: 0,
         presence_penalty: 0,
-        // @ts-ignore
-        max_tokens: 5000,
         n: 1
       },
       { apiKey: useRuntimeConfig().openaiApiKey }
