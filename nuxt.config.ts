@@ -28,7 +28,7 @@ export default defineNuxtConfig({
           styles: { configFile: './assets/style/vuetify.scss' }
         })
       )
-      config.define = { global: {} }
     }
-  }
+  },
+  vite: { define: { global: {} } }
 })
