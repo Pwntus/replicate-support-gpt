@@ -8,9 +8,6 @@ export default defineNuxtConfig({
     url: process.env.NUXT_SUPABASE_URL || '',
     key: process.env.NUXT_SUPABASE_KEY || ''
   },
-  nitro: {
-    preset: 'vercel-edge'
-  },
   build: {
     transpile: ['vuetify']
   },
