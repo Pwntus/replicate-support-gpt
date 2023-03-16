@@ -10,7 +10,7 @@ v-app
 <script setup lang="ts">
 const title = 'Replicate SupportGPT'
 const description = 'Get support, in seconds.'
-const image = ''
+const image = 'https://replicate-support-gpt.vercel.app/cover.jpg'
 
 useServerSeoMeta({
   title,
