@@ -93,9 +93,7 @@ ${query}`
     )
 
     // return sendStream(event, stream)
-    return new Response(stream, {
-      headers: { 'Content-Type': 'application/json; charset=utf-8' }
-    })
+    return stream
   } catch (e: any) {
     console.error(e)
     return { error: e.message }
