@@ -7,7 +7,24 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.10.0",
+    "@vercel/analytics": "^0.1.11",
+    "gpt3-tokenizer": "^1.1.5",
+    "markdown-it": "^13.0.1",
+    "openai": "^3.2.1",
+    "openai-streams": "^4.1.0",
+    "vuetify": "^3.1.9"
+  },
   "devDependencies": {
-    "nuxt": "^3.0.0"
+    "@mdi/font": "^7.1.96",
+    "@types/lodash": "^4.14.191",
+    "nuxt": "^3.3.0",
+    "pug": "^3.0.2",
+    "pug-plain-loader": "^1.1.0",
+    "sass": "^1.59.3",
+    "stylus": "^0.59.0",
+    "stylus-loader": "^7.1.0",
+    "vite-plugin-vuetify": "^1.0.2"
   }
 }
