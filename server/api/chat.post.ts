@@ -1,8 +1,10 @@
 import { Configuration, OpenAIApi } from 'openai'
-import { serverSupabaseClient } from '#supabase/server'
 import GPT3Tokenizer from 'gpt3-tokenizer'
 import { OpenAI } from 'openai-streams/node'
 import { sendStream } from 'h3'
+
+// @ts-ignore
+import { serverSupabaseClient } from '#supabase/server'
 
 const openai = new OpenAIApi(
   new Configuration({
