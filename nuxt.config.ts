@@ -2,9 +2,11 @@ import vuetify from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   runtimeConfig: {
-    openaiApiKey: process.env.NUXT_OPENAI_API_KEY || '',
-    supabaseUrl: process.env.NUXT_SUPABASE_URL || '',
-    supabaseKey: process.env.NUXT_SUPABASE_KEY || ''
+    openaiApiKey: process.env.NUXT_OPENAI_API_KEY || ''
+  },
+  supabase: {
+    url: process.env.NUXT_SUPABASE_URL || '',
+    key: process.env.NUXT_SUPABASE_KEY || ''
   },
   nitro: {
     preset: 'vercel-edge'
@@ -17,6 +19,7 @@ export default defineNuxtConfig({
     client: false
   },
   css: ['vuetify/styles', '@mdi/font/css/materialdesignicons.css'],
+  modules: ['@nuxtjs/supabase'],
   hooks: {
     'vite:extendConfig': (config) => {
       config.plugins?.push(
