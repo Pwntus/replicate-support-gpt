@@ -92,8 +92,7 @@ ${query}`
       { apiKey: useRuntimeConfig().openaiApiKey }
     )
 
-    // return sendStream(event, stream)
-    return stream
+    return sendStream(event, stream)
   } catch (e: any) {
     console.error(e)
     return { error: e.message }
