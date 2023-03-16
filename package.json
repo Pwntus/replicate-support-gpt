@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.11.0",
+    "@vercel/analytics": "^0.1.11",
     "gpt3-tokenizer": "^1.1.5",
     "markdown-it": "^13.0.1",
     "openai": "^3.2.1",
