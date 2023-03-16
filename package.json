@@ -19,6 +19,8 @@
   "devDependencies": {
     "@mdi/font": "^7.1.96",
     "@types/lodash": "^4.14.191",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.3",
     "nuxt": "^3.3.0",
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.1.0",
