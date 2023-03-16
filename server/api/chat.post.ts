@@ -1,10 +1,8 @@
 import { Configuration, OpenAIApi } from 'openai'
+import { createClient } from '@supabase/supabase-js'
 import GPT3Tokenizer from 'gpt3-tokenizer'
 import { OpenAI } from 'openai-streams/node'
 import { sendStream } from 'h3'
-
-// @ts-ignore
-import { serverSupabaseClient } from '#supabase/server'
 
 const openai = new OpenAIApi(
   new Configuration({
@@ -12,22 +10,16 @@ const openai = new OpenAIApi(
   })
 )
 
-/*
 const supabase = createClient(
   useRuntimeConfig().supabaseUrl,
   useRuntimeConfig().supabaseKey
 )
+
 // @ts-ignore
 const tokenizer = new GPT3Tokenizer.default({ type: 'gpt3' })
-*/
 
 export default defineEventHandler(async (event) => {
-  const supabase = serverSupabaseClient(event)
-  console.log(supabase)
-  return { api: 'ok' }
-  /*
   try {
-
     const { query } = await readBody(event)
 
     // OpenAI recommends replacing newlines with spaces for best results
@@ -107,5 +99,4 @@ ${query}`
     console.error(e)
     return { error: e.message }
   }
-    */
 })
