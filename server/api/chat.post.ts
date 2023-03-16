@@ -9,12 +9,12 @@ const openai = new OpenAIApi(
     apiKey: useRuntimeConfig().openaiApiKey
   })
 )
-/*
+
 const supabase = createClient(
   useRuntimeConfig().supabaseUrl,
   useRuntimeConfig().supabaseKey
 )
-
+/*
 // @ts-ignore
 const tokenizer = new GPT3Tokenizer.default({ type: 'gpt3' })
 */
