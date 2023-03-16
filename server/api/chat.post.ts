@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
 
     const { error, data: documents } = await supabase.rpc('match_documents', {
       query_embedding: embedding,
-      similarity_threshold: 0.5,
+      similarity_threshold: 0.8,
       match_count: 10
     })
 
@@ -60,18 +60,35 @@ export default defineEventHandler(async (event) => {
       contextText += `${content.trim()}\n---\n`
     }
 
-    const systemContent = `You are a very enthusiastic Replicate representative who loves to help people! Given the following sections from the Replicate documentation, answer the question using only that information, outputted in markdown format. If you are unsure and the answer is not explicitly written in the documentation, say "Sorry, I don't know how to help with that.".
+    const systemContent = `You are a very enthusiastic Replicate representative who loves to help people! Given the following sections from the Replicate documentation, answer the question using only that information, outputted in markdown format. If you are unsure and the answer is not explicitly written in the documentation, say "Sorry, I don't know how to help with that.".`
 
-Context sections:
-${contextText}`
+    const userContent = `Context sections:
+You can use Replicate to run machine learning models in the cloud from your own code, without having to set up any servers. Our community has published hundreds of open-source models that you can run, or you can run your own models.
 
-    const userMessage = `Question:
+Question: 
+what is replicate?    
+`
+
+    const assistantContent = `Replicate lets you run machine learning models with a cloud API, without having to understand the intricacies of machine learning or manage your own infrastructure. You can run open-source models that other people have published, or package and publish your own models. Those models can be public or private.`
+
+    const userMessage = `Context sections:
+${contextText}
+
+Question:
 ${query}`
 
     const messages: any[] = [
       {
         role: 'system',
         content: systemContent
+      },
+      {
+        role: 'user',
+        content: userContent
+      },
+      {
+        role: 'assistant',
+        content: assistantContent
       },
       {
         role: 'user',
@@ -84,12 +101,7 @@ ${query}`
       {
         model: 'gpt-3.5-turbo',
         messages,
-        stream: true,
-        temperature: 0,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-        n: 1
+        stream: true
       },
       { apiKey: useRuntimeConfig().openaiApiKey }
     )

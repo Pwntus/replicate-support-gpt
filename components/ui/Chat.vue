@@ -15,8 +15,8 @@ main
     )
     .answers
       .answer(
-        v-for="(item, index) in answers.reverse()"
-        v-html="formatAnswer(item)"
+        v-for="[key, value] of Object.entries(answers).reverse()"
+        v-html="formatAnswer(value)"
       )
 </template>
 
@@ -29,7 +29,8 @@ const md = new MarkdownIt()
 const loading = ref(false)
 const input = ref<null | HTMLInputElement>(null)
 const query = ref<string | null>(null)
-const answers = ref<string[]>([])
+const answers = ref<any>({})
+let answers_n = 0
 
 const formatAnswer = (text: string) => md.render(text)
 
@@ -57,7 +58,9 @@ const onChat = async () => {
     const decoder = new TextDecoder()
     let done = false
 
-    const len = answers.value.push('')
+    const key = answers_n
+    answers_n += 1
+    answers.value[key] = ''
 
     while (!done) {
       const { value, done: doneReading } = await reader.read()
@@ -73,7 +76,7 @@ const onChat = async () => {
       } catch (e) {
         console.log(e)
       }
-      answers.value[len - 1] += text
+      answers.value[key] += text
     }
   } catch (e) {
     console.log(e)
@@ -94,6 +97,10 @@ main
       border-radius 16px
       box-shadow 0 10px 35px -5px rgba(0, 0, 0, 16%) !important
 
-      :deep(ul)
+      :deep(ul), :deep(ol)
         padding 16px 0 0 32px
+
+      :deep(pre)
+        white-space pre-wrap
+        word-wrap break-word
 </style>
