@@ -4,6 +4,8 @@ Make ChatGPT answer questions based on **your** documentation.
 
 ## How it works
 
+The goal is to make ChatGPT answer questions within a limited context, where the context is a relevant secition of a larger documentation. To do this we use [embeddings](https://platform.openai.com/docs/guides/embeddings). In short, embeddings are tokens converted to vectors that can be used to calculate how closely related two strings are to each other. If we split the documentation into chunks and encode them as embeddings in a vector database, we can query relevant documentation chunks later if we use the same encoding on questions. The relevant documentation chunks will then be used as context for a ChatGPT session.
+
 This app is powered by:
 
 ⚡️ [Supabase](https://supabase.com/), for vector based database.
@@ -13,8 +15,6 @@ This app is powered by:
 ⚡️ Nuxt.js [server-side API handlers](server/api), for talking to the Supabase database.
 
 📦 [Vuetify](https://vuetifyjs.com/en/), a Vue.js component framework for the browser UI.
-
-The goal is to make ChatGPT answer questions within a limited context, where the context is a relevant secition of a larger documentation. To do this we use [embeddings](https://platform.openai.com/docs/guides/embeddings). In short, embeddings are tokens converted to vectors that can be used to calculate how closely related two strings are to each other. If we split the documentation into chunks and encode them as embeddings in a vector database, we can query relevant documentation chunks later if we use the same encoding on questions. The relevant documentation chunks will then be used as context for a ChatGPT session.
 
 ## Setup Supabase
 
@@ -37,7 +37,7 @@ create table documents (
 );
 ```
 
-Create a PostGRES function uses the `<==>` cosine distance operator to get similar documentation chunks.
+Create a PostgreSQL function uses the `<==>` cosine distance operator to get similar documentation chunks.
 
 ```sql
 create or replace function match_documents (
