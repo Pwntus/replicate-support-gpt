@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
 
     const { error, data: documents } = await supabase.rpc('match_documents', {
       query_embedding: embedding,
-      similarity_threshold: 0.8,
+      similarity_threshold: 0.7,
       match_count: 10
     })
 
