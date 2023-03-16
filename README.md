@@ -1,4 +1,4 @@
-# Replicate SupportGPT
+# [Replicate SupportGPT](https://replicate-support-gpt.vercel.app/)
 
 Make ChatGPT answer questions based on **your** documentation.
 
