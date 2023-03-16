@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
 
     const { error, data: documents } = await supabase.rpc('match_documents', {
       query_embedding: embedding,
-      similarity_threshold: 0.7,
+      similarity_threshold: 0.1,
       match_count: 10
     })
 
@@ -52,13 +52,22 @@ export default defineEventHandler(async (event) => {
       const encoded = tokenizer.encode(content)
       tokenCount += encoded.text.length
 
-      // Limit context to max 1500 tokens (configurable)
-      if (tokenCount > 8192) {
+      // Limit context tokens
+      if (tokenCount > 10000) {
         break
       }
 
       contextText += `${content.trim()}\n---\n`
     }
+
+    console.log(
+      'Context documents',
+      documents.length,
+      'Context documents scores',
+      documents.map((i: any) => i.similarity),
+      'token count',
+      tokenCount
+    )
 
     const systemContent = `You are a very enthusiastic Replicate representative who loves to help people! Given the following sections from the Replicate documentation, answer the question using only that information, outputted in markdown format. If you are unsure and the answer is not explicitly written in the documentation, say "Sorry, I don't know how to help with that.".`
 
@@ -99,7 +108,7 @@ ${query}`
     const stream = await OpenAI(
       'chat',
       {
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4',
         messages,
         stream: true
       },

@@ -14,8 +14,9 @@ main
     .answers
       .answer(
         v-for="[key, value] of Object.entries(answers).reverse()"
-        v-html="formatAnswer(value)"
       )
+        .answer-query {{ value.query }}
+        .answer-answer(v-html="formatAnswer(value.answer)")
 </template>
 
 <script setup lang="ts">
@@ -39,7 +40,7 @@ const onChat = async () => {
   try {
     const key = answers_n
     answers_n += 1
-    answers.value[key] = 'Loading...'
+    answers.value[key] = { query: q, answer: 'Loading...' }
 
     const response = await fetch('/api/chat', {
       method: 'post',
@@ -56,7 +57,7 @@ const onChat = async () => {
     const decoder = new TextDecoder()
     let done = false
 
-    answers.value[key] = ''
+    answers.value[key].answer = ''
 
     while (!done) {
       const { value, done: doneReading } = await reader.read()
@@ -72,7 +73,7 @@ const onChat = async () => {
       } catch (e) {
         console.log(e)
       }
-      answers.value[key] += text
+      answers.value[key].answer += text
     }
   } catch (e) {
     console.log(e)
@@ -89,11 +90,20 @@ main
       background #fff
       border-radius 16px
       box-shadow 0 10px 35px -5px rgba(0, 0, 0, 16%) !important
+      overflow hidden
 
-      :deep(ul), :deep(ol)
-        padding 16px 0 0 32px
+      .answer-query
+        margin -16px -16px 16px
+        padding 16px
+        color #fff
+        font-weight bold
+        background #e49201
 
-      :deep(pre)
-        white-space pre-wrap
-        word-wrap break-word
+      .answer-answer
+        :deep(ul), :deep(ol)
+          padding 16px 0 0 32px
+
+        :deep(pre)
+          white-space pre-wrap
+          word-wrap break-word
 </style>
