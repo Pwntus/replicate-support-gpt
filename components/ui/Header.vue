@@ -6,7 +6,7 @@ header(:class="{ xs }")
   v-btn(
     :size="size"
     :height="height"
-    href="https://github.com/Pwntus/change-hairstyle-ai"
+    href="https://github.com/Pwntus/replicate-support-gpt"
     target="_new"
     color="secondary"
     prepend-icon="mdi-github"
