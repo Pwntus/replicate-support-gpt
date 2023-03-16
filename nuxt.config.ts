@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     supabaseKey: process.env.NUXT_SUPABASE_KEY || ''
   },
   // Vercel edge functions are incompatible with supabase
-  // nitro: { preset: 'vercel-edge' },
+  nitro: { preset: 'vercel-edge' },
   build: {
     transpile: ['vuetify']
   },
