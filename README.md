@@ -6,7 +6,7 @@ Make ChatGPT answer questions based on **your** documentation.
 
 ## How it works
 
-The goal is to make ChatGPT answer questions within a limited context, where the context is a relevant secition of a larger documentation. To do this we use [embeddings](https://platform.openai.com/docs/guides/embeddings). In short, embeddings are tokens converted to vectors that can be used to calculate how closely related two strings are to each other. If we split the documentation into chunks and encode them as embeddings in a vector database, we can query relevant documentation chunks later if we use the same encoding on questions. The relevant documentation chunks will then be used as context for a ChatGPT session.
+The goal is to make ChatGPT answer questions within a limited context, where the context is a relevant section of a larger documentation. To do this we use [embeddings](https://platform.openai.com/docs/guides/embeddings). In short, embeddings are tokens converted into vectors that can be used to calculate how closely related two strings are. If we split the documentation into chunks and encode them as embeddings in a vector database, we can query relevant documentation chunks later if we use the same encoding on questions. The relevant documentation chunks will then be used as context for a ChatGPT session.
 
 This app is powered by:
 
@@ -20,7 +20,7 @@ This app is powered by:
 
 ## Setup Supabase
 
-Supabase supports vectors in their SQL database. Create an account and execute the following queries:
+Supabase supports vectors in their PostgreSQL database. Create an account and execute the following queries:
 
 Enable the vector extension:
 
@@ -39,7 +39,7 @@ create table documents (
 );
 ```
 
-Create a PostgreSQL function uses the `<==>` cosine distance operator to get similar documentation chunks.
+Create a PostgreSQL function that uses the `<=>` cosine distance operator to get similar documentation chunks.
 
 ```sql
 create or replace function match_documents (
@@ -72,7 +72,7 @@ $$;
 
 ## Run it locally
 
-You need a [OpenAI API key](https://platform.openai.com/account/api-keys) and a Supabase URL and Supabase API key (you can find these in the Supabase web portal under Project → API). Copy the contents of [.example.env](.example.env) into a new file in the root of your directory called `.env` and insert the API key(s) there, like this:
+You need an [OpenAI API key](https://platform.openai.com/account/api-keys), a Supabase URL and Supabase API key (you can find these in the Supabase web portal under Project → API). Copy the contents of [.example.env](.example.env) into a new file in the root of your directory called `.env` and insert the API keys there, like this:
 
 ```bash
 NUXT_OPENAI_API_KEY=<your OpenAI API key here>
