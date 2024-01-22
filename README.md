@@ -1,3 +1,5 @@
+> Discontinued, not hosted anymore.
+
 # [Replicate SupportGPT](https://replicate-support-gpt.vercel.app/)
 
 Make ChatGPT answer questions based on **your** documentation.
